@@ -55,7 +55,10 @@ def GreyRelational(D, H, P):
  
 # ref: https://digital.csic.es/bitstream/10261/167067/1/Leak-Bayesian.pdf
 def BayesianClassifiers(freq, total_leak, age):
-    pass
+    if freq / total_leak > 5.3:
+        if age > 12.3:
+            return True
+    return False
 
 def predictToBeBroken(data):
     """Main algorithm: which combines serveral potenital algorithm"""
@@ -69,11 +72,11 @@ def predictToBeBroken(data):
     if grey_res > 0:
         return True
     
-    # 3. Bayesian classifiers
+    # 3. Bayesian classifiers 
     baye = BayesianClassifiers(data.get('check-frequency'), data.get('total-detected-leak'), data.get('age'))
-    
-    
-    
+    if baye > 0:
+        return True
+
     
     return False
 
